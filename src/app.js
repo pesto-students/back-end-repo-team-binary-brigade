@@ -2,6 +2,8 @@ import express from "express";
 import { createServer } from "http";
 import dotenv from "dotenv";
 import connectDB from "../config/database";
+import setupSocket from "../config/socket";
+
 // import middlewares
 import checkUserAuthentication from "./middlewares/common/checkUserAuthentication";
 
