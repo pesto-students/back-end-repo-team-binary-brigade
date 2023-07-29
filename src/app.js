@@ -8,7 +8,13 @@ import checkUserAuthentication from "./middlewares/common/checkUserAuthenticatio
 // import routers
 import userRouter from "./routes/user.routes";
 import authenticationRouter from "./authenticate";
-import setupSocket from "../config/socket";
+import collegeRouter from "./routes/college.routes";
+import collegeAdminRouter from "./routes/collegeAdmin.routes";
+import postRoutes from "./routes/post.routes";
+import postLikeRoutes from "./routes/postLike.routes";
+import postCommentRoutes from "./routes/postComment.routes";
+import savePostRoutes from "./routes/savedPost.routes";
+import reportPostRoutes from "./routes/reportPost.routes";
 
 dotenv.config();
 const app = express();
