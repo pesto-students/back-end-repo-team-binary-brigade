@@ -6,6 +6,7 @@ import setupSocket from "../config/socket";
 
 // import middlewares
 import checkUserAuthentication from "./middlewares/common/checkUserAuthentication";
+import handleErrorResponse from "./middlewares/common/handleErrorResponse";
 
 // import routers
 import userRouter from "./routes/user.routes";
@@ -26,6 +27,7 @@ setupSocket(server);
 // middlewares
 app.use(express.json());
 app.use(checkUserAuthentication);
+app.use(handleErrorResponse);
 
 // base routers
 app.use("/user", userRouter);
