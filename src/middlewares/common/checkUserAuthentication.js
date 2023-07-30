@@ -4,7 +4,9 @@ const checkUserAuthentication = (req, res, next) => {
   // Exclude login and signup route from token verification
   if (
     req.path === "/authentication" ||
-    (req.path === "/user" && req.method === "POST")
+    (req.path === "/user" && req.method === "POST") ||
+    req.path === "/send-otp" ||
+    req.path === "/verify-otp"
   ) {
     return next();
   }

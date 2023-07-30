@@ -14,10 +14,10 @@ import userRouter from "./routes/user.routes";
 import authenticationRouter from "./authenticate";
 import collegeRouter from "./routes/college.routes";
 import postRoutes from "./routes/post.routes";
+import savePostRoutes from "./routes/savedPost.routes";
 // import collegeAdminRouter from "./routes/collegeAdmin.routes";
 // import postLikeRoutes from "./routes/postLike.routes";
 // import postCommentRoutes from "./routes/postComment.routes";
-// import savePostRoutes from "./routes/savedPost.routes";
 // import reportPostRoutes from "./routes/reportPost.routes";
 
 dotenv.config();
@@ -43,10 +43,10 @@ app.use("/user", userRouter);
 app.use("/authentication", authenticationRouter);
 app.use("/college", collegeRouter);
 app.use("/post", postRoutes);
+app.use("/saved-post", savePostRoutes);
 // app.use("/college-admin", collegeAdminRouter);
 // app.use("/post-like", postLikeRoutes);
 // app.use("/post-comment", postCommentRoutes);
-// app.use("/saved-post", savePostRoutes);
 // app.use("/report", reportPostRoutes);
 
 // Connect to the database
