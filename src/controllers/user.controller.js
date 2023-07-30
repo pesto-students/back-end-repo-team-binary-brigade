@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import otpGenerator from "otp-generator";
 import userService from "../services/user.service";
 
 const userController = {
@@ -13,7 +14,7 @@ const userController = {
   },
 
   // get user details by id
-  getUserById: async (req, res, next) => {
+  getUserDetails: async (req, res, next) => {
     const { id } = req.params;
     try {
       const user = await userService.get(id);
@@ -53,7 +54,7 @@ const userController = {
   updateUser: async (req, res, next) => {
     const { id } = req.params;
     try {
-      const updatedUser = await userService.updateUser(id, req.body);
+      const updatedUser = await userService.update(id, req.body);
       return res.status(200).json(updatedUser);
     } catch (error) {
       return next(error);
@@ -69,6 +70,26 @@ const userController = {
     } catch (error) {
       return next(error);
     }
+  },
+
+  // forget password
+  forgetUserPassword: async (req, res, next) => {
+    const { email } = req.body;
+
+    // Generate a random 6-digit OTP
+    const otp = otpGenerator.generate(6, {
+      digits: true,
+      lowerCaseAlphabets: false,
+      upperCaseAlphabets: false,
+      specialChars: false,
+    });
+
+    // try {
+    //   await userService.deleteUser(id);
+    //   return res.status(200).json({ message: "User deleted successfully" });
+    // } catch (error) {
+    //   return next(error);
+    // }
   },
 };
 

@@ -1,17 +1,12 @@
 import express from "express";
-import {
-  addPost,
-  deletePost,
-  getAllPost,
-  updatePost,
-} from "../controllers/post.controller";
+import postController from "../controllers/post.controller";
 
 const postRoutes = express.Router();
 
-postRoutes.post( "/", addPost);
-
-postRoutes.get("/", getAllPost);
-postRoutes.put("/:id", updatePost);
-postRoutes.delete("/:id", deletePost);
+postRoutes.post("/", postController.createPost);
+postRoutes.get("/", postController.getAllPost);
+postRoutes.get("/:id", postController.getPostDetails);
+postRoutes.put("/:id", postController.updatePost);
+postRoutes.delete("/:id", postController.deletePost);
 
 export default postRoutes;

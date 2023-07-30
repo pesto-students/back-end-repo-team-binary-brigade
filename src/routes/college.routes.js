@@ -1,17 +1,12 @@
 import express from "express";
-import {
-  addCollege,
-  deleteCollege,
-  getAllCollege,
-  updateCollegeDetails,
-} from "../controllers/college.cotroller";
+import collegeController from "../controllers/college.cotroller";
 
 const collegeRouter = express.Router();
 
-collegeRouter.post( "/", addCollege);
-
-collegeRouter.get("/", getAllCollege);
-collegeRouter.put("/:id", updateCollegeDetails);
-collegeRouter.delete("/:id", deleteCollege);
+collegeRouter.post("/", collegeController.addCollege);
+collegeRouter.get("/", collegeController.getAllCollegeList);
+collegeRouter.get("/:id", collegeController.getCollegeDetails);
+collegeRouter.put("/:id", collegeController.updateCollegeDetails);
+collegeRouter.delete("/:id", collegeController.deleteCollege);
 
 export default collegeRouter;

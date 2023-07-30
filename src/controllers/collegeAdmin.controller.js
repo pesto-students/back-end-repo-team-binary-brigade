@@ -1,52 +1,66 @@
-import CollegeAdmin from "../models/collegeAdmin.model";
+import collegeAdminService from "../services/collegeAdmin.service";
 
+const collegeAdminController = {
+  // get all data list
+  getDataList: async (req, res, next) => {
+    try {
+      const colleges = await collegeAdminService.find();
+      return res.status(200).json(colleges);
+    } catch (error) {
+      return next(error);
+    }
+  },
 
-export const addCollegeAdmin = async (req, res, next) => {
+  // get data details by id
+  getDataById: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const college = await collegeAdminService.get(id);
+      if (!college) {
+        return res.status(404).json({ error: "College Admin not found" });
+      }
+      return res.status(200).json(college);
+    } catch (error) {
+      return next(error);
+    }
+  },
 
-  try {
-    const collegeAdmin = await CollegeAdmin.create(req.body);
+  // create data
+  createData: async (req, res, next) => {
+    try {
+      const collegeAdmin = await collegeAdminService.create(req.body);
+      return res.status(201).json(collegeAdmin);
+    } catch (error) {
+      return next(error);
+    }
+  },
 
-    return res.status(201).json(collegeAdmin);
-  } catch (err) {
-    return next(err);
-  }
+  // update data details
+  updateData: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const updatedCollegeAdminData = await collegeAdminService.update(
+        id,
+        req.body
+      );
+      return res.status(200).json(updatedCollegeAdminData);
+    } catch (error) {
+      return next(error);
+    }
+  },
+
+  // delete data
+  deleteData: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      await collegeAdminService.remove(id);
+      return res
+        .status(200)
+        .json({ message: "College Admin deleted successfully" });
+    } catch (error) {
+      return next(error);
+    }
+  },
 };
 
-export const getAllCollegeAdmin = async (req, res, next) => {
-    try {
-      const collegeAdminList = await CollegeAdmin.find().populate("college_id").populate("user_id");
-      return res.status(200).json(collegeAdminList);
-    } catch (err) {
-      return next(err);
-    }
-  };
-
-  export const updateCollegeAdmin = async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const updatedCollegeAdmin = await CollegeAdmin.findByIdAndUpdate(id, req.body);
-      if (!updatedCollegeAdmin) {
-        return res.status(404).json({ message: "College Admin not found" });
-      }
-      return res.status(200).json({ message: "College Admin data updated successfully" });
-    } catch (err) {
-      return next(err);
-    }
-  };
-  
-  
-  export const deleteCollegeAdmin = async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const deletedCollegeAdmin = await CollegeAdmin.findByIdAndDelete(id);
-      if (!deletedCollegeAdmin) {
-        return res.status(404).json({ message: "College Admin not found" });
-      }
-      return res.status(200).json({ message: "College Admin deleted successfully" });
-    } catch (err) {
-      return next(err);
-    }
-  };
-
-
-
+export default collegeAdminController;

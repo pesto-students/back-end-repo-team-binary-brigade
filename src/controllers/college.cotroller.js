@@ -2,7 +2,7 @@ import collegeService from "../services/college.service";
 
 const collegeController = {
   // get all data list
-  getDataList: async (req, res, next) => {
+  getAllCollegeList: async (req, res, next) => {
     try {
       const colleges = await collegeService.find();
       return res.status(200).json(colleges);
@@ -11,8 +11,8 @@ const collegeController = {
     }
   },
 
-  // get data details by id
-  getDataById: async (req, res, next) => {
+  // get details by id
+  getCollegeDetails: async (req, res, next) => {
     const { id } = req.params;
     try {
       const college = await collegeService.get(id);
@@ -26,7 +26,7 @@ const collegeController = {
   },
 
   // create data
-  createData: async (req, res, next) => {
+  addCollege: async (req, res, next) => {
     try {
       const college = await collegeService.create(req.body);
       return res.status(201).json(college);
@@ -36,7 +36,7 @@ const collegeController = {
   },
 
   // update data details
-  updateData: async (req, res, next) => {
+  updateCollegeDetails: async (req, res, next) => {
     const { id } = req.params;
     try {
       const updatedCollegeData = await collegeService.update(id, req.body);
@@ -47,7 +47,7 @@ const collegeController = {
   },
 
   // delete data
-  deleteData: async (req, res, next) => {
+  deleteCollege: async (req, res, next) => {
     const { id } = req.params;
     try {
       await collegeService.remove(id);

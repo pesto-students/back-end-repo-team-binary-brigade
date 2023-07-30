@@ -1,5 +1,6 @@
 import express from "express";
 import { createServer } from "http";
+import session from "express-session";
 import dotenv from "dotenv";
 import connectDB from "../config/database";
 import setupSocket from "../config/socket";
@@ -12,12 +13,12 @@ import handleErrorResponse from "./middlewares/common/handleErrorResponse";
 import userRouter from "./routes/user.routes";
 import authenticationRouter from "./authenticate";
 import collegeRouter from "./routes/college.routes";
-import collegeAdminRouter from "./routes/collegeAdmin.routes";
 import postRoutes from "./routes/post.routes";
-import postLikeRoutes from "./routes/postLike.routes";
-import postCommentRoutes from "./routes/postComment.routes";
-import savePostRoutes from "./routes/savedPost.routes";
-import reportPostRoutes from "./routes/reportPost.routes";
+// import collegeAdminRouter from "./routes/collegeAdmin.routes";
+// import postLikeRoutes from "./routes/postLike.routes";
+// import postCommentRoutes from "./routes/postComment.routes";
+// import savePostRoutes from "./routes/savedPost.routes";
+// import reportPostRoutes from "./routes/reportPost.routes";
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,14 @@ setupSocket(server);
 
 // middlewares
 app.use(express.json());
+// Set up session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(checkUserAuthentication);
 app.use(handleErrorResponse);
 
@@ -33,12 +42,12 @@ app.use(handleErrorResponse);
 app.use("/user", userRouter);
 app.use("/authentication", authenticationRouter);
 app.use("/college", collegeRouter);
-app.use("/college-admin", collegeAdminRouter);
 app.use("/post", postRoutes);
-app.use("/post-like", postLikeRoutes);
-app.use("/post-comment", postCommentRoutes);
-app.use("/saved-post", savePostRoutes);
-app.use("/report", reportPostRoutes);
+// app.use("/college-admin", collegeAdminRouter);
+// app.use("/post-like", postLikeRoutes);
+// app.use("/post-comment", postCommentRoutes);
+// app.use("/saved-post", savePostRoutes);
+// app.use("/report", reportPostRoutes);
 
 // Connect to the database
 connectDB();

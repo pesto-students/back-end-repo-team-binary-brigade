@@ -1,17 +1,17 @@
-import express from "express";
-import {
-  addCollegeAdmin,
-  deleteCollegeAdmin,
-  getAllCollegeAdmin,
-  updateCollegeAdmin,
-} from "../controllers/collegeAdmin.controller";
+// import express from "express";
+// import {
+//   addCollegeAdmin,
+//   deleteCollegeAdmin,
+//   getAllCollegeAdmin,
+//   updateCollegeAdmin,
+// } from "../controllers/collegeAdmin.controller";
 
-const collegeAdminRouter = express.Router();
+// const collegeAdminRouter = express.Router();
 
-collegeAdminRouter.post( "/", addCollegeAdmin);
+// collegeAdminRouter.post( "/", addCollegeAdmin);
 
-collegeAdminRouter.get("/", getAllCollegeAdmin);
-collegeAdminRouter.put("/:id", updateCollegeAdmin);
-collegeAdminRouter.delete("/:id", deleteCollegeAdmin);
+// collegeAdminRouter.get("/", getAllCollegeAdmin);
+// collegeAdminRouter.put("/:id", updateCollegeAdmin);
+// collegeAdminRouter.delete("/:id", deleteCollegeAdmin);
 
-export default collegeAdminRouter;
+// export default collegeAdminRouter;
