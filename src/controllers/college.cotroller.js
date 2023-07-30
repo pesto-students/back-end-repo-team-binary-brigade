@@ -1,53 +1,61 @@
-import College from "../models/college.model";
+import collegeService from "../services/college.service";
 
-
-export const addCollege = async (req, res, next) => {
-
-  try {
-    const college = await College.create(req.body);
-
-    return res.status(201).json(college);
-  } catch (err) {
-    return next(err);
-  }
-};
-
-
-export const getAllCollege = async (req, res, next) => {
-  try {
-    const collegeList = await College.find();
-    return res.status(200).json(collegeList);
-  } catch (err) {
-    return next(err);
-  }
-};
-
-
-export const updateCollegeDetails = async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    const updatedCollege = await College.findByIdAndUpdate(id, req.body);
-    if (!updatedCollege) {
-      return res.status(404).json({ message: "College not found" });
+const collegeController = {
+  // get all data list
+  getDataList: async (req, res, next) => {
+    try {
+      const colleges = await collegeService.find();
+      return res.status(200).json(colleges);
+    } catch (error) {
+      return next(error);
     }
-    return res.status(200).json({ message: "College data updated successfully" });
-  } catch (err) {
-    return next(err);
-  }
-};
+  },
 
-
-export const deleteCollege = async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    const deletedCollege = await College.findByIdAndDelete(id);
-    if (!deletedCollege) {
-      return res.status(404).json({ message: "College not found" });
+  // get data details by id
+  getDataById: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const college = await collegeService.get(id);
+      if (!college) {
+        return res.status(404).json({ error: "College not found" });
+      }
+      return res.status(200).json(college);
+    } catch (error) {
+      return next(error);
     }
-    return res.status(200).json({ message: "College deleted successfully" });
-  } catch (err) {
-    return next(err);
-  }
+  },
+
+  // create data
+  createData: async (req, res, next) => {
+    try {
+      const college = await collegeService.create(req.body);
+      return res.status(201).json(college);
+    } catch (error) {
+      return next(error);
+    }
+  },
+
+  // update data details
+  updateData: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const updatedCollegeData = await collegeService.update(id, req.body);
+      return res.status(200).json(updatedCollegeData);
+    } catch (error) {
+      return next(error);
+    }
+  },
+
+  // delete data
+  deleteData: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      await collegeService.remove(id);
+      return res.status(200).json({ message: "College deleted successfully" });
+    } catch (error) {
+      return next(error);
+    }
+  },
 };
 
-
+export default collegeController;
