@@ -84,12 +84,22 @@ const userController = {
       specialChars: false,
     });
 
-    // try {
-    //   await userService.deleteUser(id);
-    //   return res.status(200).json({ message: "User deleted successfully" });
-    // } catch (error) {
-    //   return next(error);
-    // }
+    // Store OTP in the session
+    req.session.otp = otp;
+    return res.status(200).json({ message: "OTP sent successfully.", otp });
+  },
+
+  // verify otp
+  verifyOtp: async (req, res, next) => {
+    const { otp } = req.body;
+    const storedOTP = req.session.otp;
+
+    if (otp === storedOTP) {
+      req.session.otp = null;
+      return res.status(200).json({ message: "OTP verified successfully." });
+    } else {
+      return res.status(401).json({ message: "Invalid OTP." });
+    }
   },
 };
 

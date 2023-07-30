@@ -22,5 +22,6 @@ userRouter.post(
   checkUserDoesNotExistsByEmail,
   userController.forgetUserPassword
 );
+userRouter.post("/verify-otp", userController.verifyOtp);
 
 export default userRouter;

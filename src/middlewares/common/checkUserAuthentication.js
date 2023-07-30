@@ -17,8 +17,8 @@ const checkUserAuthentication = (req, res, next) => {
 
   try {
     // Verify and decode the token
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decodedToken; // Attach the decoded token payload to the request object
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // decodedToken or user details
+    req.user = decodedToken;
     next(); // Proceed to the next middleware
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
