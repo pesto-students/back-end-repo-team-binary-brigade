@@ -17,16 +17,6 @@ const postCommentSchema = new Schema(
       type: String,
       required: true,
     },
-
-    //Status of the User
-    //1. Active
-    //0. Inactive
-    //-1. Deleted
-    status: {
-      type: Number,
-      enum: [1, 0, -1],
-      default: 1,
-    },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
