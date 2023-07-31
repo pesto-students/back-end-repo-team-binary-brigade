@@ -3,7 +3,7 @@ const handleErrorResponse = (err, req, res, next) => {
   let errorMessage = "Internal Server Error";
 
   if (err instanceof Error) {
-    errorMessage = err.message;
+    errorMessage = err.toString();
 
     switch (err.name) {
       case "ValidationError":
@@ -12,7 +12,6 @@ const handleErrorResponse = (err, req, res, next) => {
         break;
       case "CastError":
         statusCode = 404;
-        errorMessage = "Resource not found";
         break;
     }
   }

@@ -15,10 +15,10 @@ import authenticationRouter from "./authenticate";
 import collegeRouter from "./routes/college.routes";
 import postRoutes from "./routes/post.routes";
 import savePostRoutes from "./routes/savedPost.routes";
+import reportPostRoutes from "./routes/reportPost.routes";
 // import collegeAdminRouter from "./routes/collegeAdmin.routes";
 // import postLikeRoutes from "./routes/postLike.routes";
 // import postCommentRoutes from "./routes/postComment.routes";
-// import reportPostRoutes from "./routes/reportPost.routes";
 
 dotenv.config();
 const app = express();
@@ -36,7 +36,6 @@ app.use(
   })
 );
 app.use(checkUserAuthentication);
-app.use(handleErrorResponse);
 
 // base routers
 app.use("/user", userRouter);
@@ -44,10 +43,11 @@ app.use("/authentication", authenticationRouter);
 app.use("/college", collegeRouter);
 app.use("/post", postRoutes);
 app.use("/saved-post", savePostRoutes);
+app.use("/report-post", reportPostRoutes);
 // app.use("/college-admin", collegeAdminRouter);
 // app.use("/post-like", postLikeRoutes);
 // app.use("/post-comment", postCommentRoutes);
-// app.use("/report", reportPostRoutes);
+app.use(handleErrorResponse);
 
 // Connect to the database
 connectDB();

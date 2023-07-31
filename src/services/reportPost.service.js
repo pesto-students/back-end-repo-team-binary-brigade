@@ -1,8 +1,8 @@
 import ReportPost from "../models/reportPost.model";
 
 const reportPostService = {
-  find: async (params) => {
-    return await ReportPost.find();
+  find: async (query) => {
+    return await ReportPost.find(query);
   },
 
   get: async (id, params) => {
