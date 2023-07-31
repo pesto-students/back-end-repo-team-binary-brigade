@@ -1,8 +1,8 @@
 import College from "../models/college.model";
 
 const collegeService = {
-  find: async (params) => {
-    return await College.find();
+  find: async (query) => {
+    return await College.find(query);
   },
 
   get: async (id, params) => {

@@ -4,7 +4,15 @@ const collegeController = {
   // get all data list
   getAllCollegeList: async (req, res, next) => {
     try {
-      const colleges = await collegeService.find();
+      let colleges = [];
+      if (req.query.searchKey) {
+        const regexQuery = {
+          name: { $regex: new RegExp(req.query.searchKey, "i") },
+        };
+        colleges = await collegeService.find(regexQuery);
+      } else {
+        colleges = await collegeService.find(req.query);
+      }
       return res.status(200).json(colleges);
     } catch (error) {
       return next(error);
