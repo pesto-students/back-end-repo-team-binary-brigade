@@ -1,8 +1,16 @@
 import User from "../models/user.model";
 
 const userService = {
-  find: async (params) => {
-    return await User.find().select("-password");
+  find: async (query) => {
+    const { skip, limit } = query;
+
+    delete query.skip;
+    delete query.limit;
+
+    return await User.find(query)
+      .select("-password -email -college_id -updatedAt -__v")
+      .skip(skip)
+      .limit(limit);
   },
 
   get: async (id, params) => {

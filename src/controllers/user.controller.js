@@ -6,7 +6,7 @@ const userController = {
   // get all user list
   getAllUsers: async (req, res, next) => {
     try {
-      const users = await userService.find();
+      const users = await userService.find(req.query);
       return res.status(200).json(users);
     } catch (error) {
       return next(error);
