@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import otpGenerator from "otp-generator";
 import userService from "../services/user.service";
+import getRandomColor from "../utils/randomColor";
 
 const userController = {
   // get all user list
@@ -31,6 +32,7 @@ const userController = {
   createUser: async (req, res, next) => {
     const { password } = req.body;
     req.body.password = bcrypt.hashSync(password, 10);
+    req.body.avatar_bg_color = getRandomColor();
 
     try {
       const user = await userService.create(req.body);
