@@ -15,10 +15,9 @@ const savedPostController = {
 
   // get all saved post
   getAllSavedPost: async (req, res, next) => {
-    const { user_id } = req.query;
     if (user_id) {
       try {
-        const savedPosts = await savedPostService.find({ user_id });
+        const savedPosts = await savedPostService.find(req.query);
         return res.status(200).json(savedPosts);
       } catch (error) {
         return next(error);

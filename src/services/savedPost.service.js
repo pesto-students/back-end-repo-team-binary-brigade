@@ -1,8 +1,8 @@
 import SavedPost from "../models/savedPost.model";
 
 const savedPostService = {
-  find: async (params) => {
-    return await SavedPost.find(params);
+  find: async (query) => {
+    return await SavedPost.find(query);
   },
 
   get: async (id) => {
