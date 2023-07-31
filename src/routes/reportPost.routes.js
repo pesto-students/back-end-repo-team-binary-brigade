@@ -2,12 +2,12 @@ import express from "express";
 import validateRequiredKeys from "../middlewares/common/validateRequiredKeys";
 import reportPostController from "../controllers/reportPost.controller";
 
-const savePostRoutes = express.Router();
+const reportPostRoutes = express.Router();
 
-savePostRoutes.post(
+reportPostRoutes.post(
   "/",
   validateRequiredKeys(["user_id", "post_id"]),
   reportPostController.reportPost
 );
 
-export default savePostRoutes;
+export default reportPostRoutes;

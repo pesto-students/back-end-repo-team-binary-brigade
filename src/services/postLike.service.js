@@ -1,8 +1,17 @@
 import PostLike from "../models/postLike.model";
 
 const postLikeService = {
-  find: async (params) => {
-    return await PostLike.find();
+  find: async (query) => {
+    const { skip, limit } = query;
+
+    delete query.skip;
+    delete query.limit;
+
+    return await PostLike.find(query)
+      .select("-post_id -updatedAt -__v")
+      .populate("user_id", "name avatar avatar_bg_color")
+      .skip(skip)
+      .limit(limit);
   },
 
   get: async (id, params) => {
