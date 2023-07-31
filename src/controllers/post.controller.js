@@ -3,8 +3,31 @@ import postService from "../services/post.service";
 const postController = {
   // get all post
   getAllPost: async (req, res, next) => {
+    const { filter } = req.query;
+
+    delete req.query.filter;
+
     try {
-      const posts = await postService.find();
+      let posts = [];
+
+      switch (filter) {
+        case "recent":
+          posts = await postService.find({
+            ...req.query,
+            sort: { createdAt: -1 },
+          });
+          break;
+        case "popular":
+          posts = await postService.find({
+            ...req.query,
+            sort: { likesCount: -1 },
+          });
+          break;
+        default:
+          posts = await postService.find(req.query);
+          break;
+      }
+
       return res.status(200).json(posts);
     } catch (error) {
       return next(error);
