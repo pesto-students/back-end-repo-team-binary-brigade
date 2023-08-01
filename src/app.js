@@ -18,6 +18,7 @@ import savePostRoutes from "./routes/savedPost.routes";
 import reportPostRoutes from "./routes/reportPost.routes";
 import postLikeRoutes from "./routes/postLike.routes";
 import postCommentRoutes from "./routes/postComment.routes";
+import uploadFileRouter from "./routes/uploadFile.routers";
 // import collegeAdminRouter from "./routes/collegeAdmin.routes";
 
 dotenv.config();
@@ -46,6 +47,7 @@ app.use("/saved-post", savePostRoutes);
 app.use("/report-post", reportPostRoutes);
 app.use("/post-like", postLikeRoutes);
 app.use("/post-comment", postCommentRoutes);
+app.use("/upload", uploadFileRouter);
 // app.use("/college-admin", collegeAdminRouter);
 app.use(handleErrorResponse);
 
