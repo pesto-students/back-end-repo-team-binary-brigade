@@ -2,7 +2,15 @@ import College from "../models/college.model";
 
 const collegeService = {
   find: async (query) => {
-    return await College.find(query);
+    const { skip, limit } = query;
+
+    delete query.skip;
+    delete query.limit;
+
+    return await College.find(query)
+      .select("-updatedAt -__v")
+      .skip(skip)
+      .limit(limit);
   },
 
   get: async (id, params) => {
