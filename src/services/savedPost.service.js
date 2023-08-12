@@ -2,7 +2,16 @@ import SavedPost from "../models/savedPost.model";
 
 const savedPostService = {
   find: async (query) => {
-    return await SavedPost.find(query);
+    const { skip, limit } = query;
+
+    delete query.skip;
+    delete query.limit;
+    return await SavedPost.find(query)
+      .select("-post_id -updatedAt -__v")
+      .populate("user_id", "name avatar avatar_bg_color")
+      .populate("post_id", "image caption")
+      .skip(skip)
+      .limit(limit);
   },
 
   get: async (id) => {

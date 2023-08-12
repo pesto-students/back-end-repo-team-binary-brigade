@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import session from "express-session";
+import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "../config/database";
 import setupSocket from "../config/socket";
@@ -26,6 +27,18 @@ const app = express();
 const server = createServer(app);
 setupSocket(server);
 
+// Allow requests from specific origins
+const allowedOrigins = ["http://localhost:3000"]; // Replace with your frontend's URL
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+app.use(cors(corsOptions));
 // middlewares
 app.use(express.json());
 // Set up session middleware
