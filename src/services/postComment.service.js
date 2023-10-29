@@ -19,7 +19,9 @@ const postCommentService = {
   },
 
   create: async (data) => {
-    return await PostComment.create(data);
+    const newPostComment = new PostComment(data);
+    const savedPostComment = await newPostComment.save();
+    return savedPostComment;
   },
 
   update: async (id, data) => {

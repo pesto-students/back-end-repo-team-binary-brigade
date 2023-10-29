@@ -18,7 +18,9 @@ const userService = {
   },
 
   create: async (data) => {
-    return await User.create(data).select("-password");
+    const newUser = new User(data);
+    const savedUser = await newUser.save();
+    return savedUser;
   },
 
   update: async (id, data) => {

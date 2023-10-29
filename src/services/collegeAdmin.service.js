@@ -10,7 +10,9 @@ const collegeAdminService = {
   },
 
   create: async (data) => {
-    return await CollegeAdmin.create(data);
+    const newCollegeAdmin = new CollegeAdmin(data);
+    const savedCollegeAdmin = await newCollegeAdmin.save();
+    return savedCollegeAdmin;
   },
 
   update: async (id, data) => {

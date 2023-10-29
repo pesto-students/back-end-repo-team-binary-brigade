@@ -36,17 +36,19 @@ const userController = {
 
     try {
       const user = await userService.create(req.body);
-      const updated_user = {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        avatar: user.avatar,
-        avatar_bg_color: user.avatar_bg_color,
-        college_id: user.college_id,
-        created_at: user.createdAt,
-        updated_at: user.updatedAt,
-      };
-      return res.status(201).json(updated_user);
+      // const updated_user = {
+      //   _id: user._id,
+      //   name: user.name,
+      //   email: user.email,
+      //   avatar: user.avatar,
+      //   avatar_bg_color: user.avatar_bg_color,
+      //   college_id: user.college_id,
+      //   created_at: user.createdAt,
+      //   updated_at: user.updatedAt,
+      // };
+
+      // console.log(user);
+      return res.status(201).json({ message: "User Created!" });
     } catch (error) {
       return next(error);
     }

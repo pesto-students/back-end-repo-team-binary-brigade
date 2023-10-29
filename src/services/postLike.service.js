@@ -19,7 +19,9 @@ const postLikeService = {
   },
 
   create: async (data) => {
-    return await PostLike.create(data);
+    const newPostLike = new PostLike(data);
+    const savedPostLike = await newPostLike.save();
+    return savedPostLike;
   },
 
   update: async (id, data) => {

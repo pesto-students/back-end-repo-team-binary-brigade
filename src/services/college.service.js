@@ -18,7 +18,9 @@ const collegeService = {
   },
 
   create: async (data) => {
-    return await College.create(data);
+    const newCollege = new College(data);
+    const savedCollege = await newCollege.save();
+    return savedCollege;
   },
 
   update: async (id, data) => {

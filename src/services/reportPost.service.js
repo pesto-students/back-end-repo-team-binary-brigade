@@ -10,7 +10,9 @@ const reportPostService = {
   },
 
   create: async (data) => {
-    return await ReportPost.create(data);
+    const newReportPost = new ReportPost(data);
+    const savedReportPost = await newReportPost.save();
+    return savedReportPost;
   },
 
   update: async (id, data) => {

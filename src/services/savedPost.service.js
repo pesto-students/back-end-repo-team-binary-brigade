@@ -19,7 +19,9 @@ const savedPostService = {
   },
 
   create: async (data) => {
-    return await SavedPost.create(data);
+    const newSavedPost = new SavedPost(data);
+    const savedPost = await newSavedPost.save();
+    return savedPost;
   },
 
   update: async (id, data) => {
